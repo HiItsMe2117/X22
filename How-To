@@ -1,0 +1,16 @@
+This program is very simple and is 
+my first program ever written so as 
+it’s a learning experience for me. 
+I welcome newcomers to programming.
+
+To get started;
+
+1) make sure to have downloaded 
+  hydra, nmap and netcat
+2) open a terminal window.
+3) cd into X22 directory 
+4) type: ./X22
+5) this should run the program and
+   all you would have to do is wait
+   for username and password at the 
+   bottom of output
