@@ -18,16 +18,16 @@ else
 echo Your Connected To Celluar
 fi
 
- nc192=$(for i in {1..13}; 
+ nc192=$(for i in {1..50}; 
 do nc -n -z -v -w 1 192.168.1.$i 22; 
 done 2>&1 | grep open | cut -b 1,2,3,4,5,6,7,8,9,10,11,12)
 
- nc10=$(for i in {1..13}; 
+ nc10=$(for i in {1..256}; 
 do nc -n -z -v -w 1 10.0.0.$i 22; 
 done 2>&1 | grep open | cut -b 1,2,3,4,5,6,7,8,9,10,11,12)
 
- nc172=$(for i in {1..13}; 
-do nc -n -z -v -w 1 172.0.0.$i 22; 
+ nc172=$(for i in {1..256}; 
+do nc -n -z -v -w 1 172.0.$i.$i 22; 
 done 2>&1 | grep open | cut -b 1,2,3,4,5,6,7,8,9,10,11,12)
 
 if [[ $ip = 192.* ]]; then
